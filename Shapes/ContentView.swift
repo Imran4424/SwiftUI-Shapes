@@ -69,9 +69,9 @@ struct Flower: Shape {
 
 struct ContentView: View {
     var body: some View {
-        Text("Imran Hossain")
-            .frame(width: 300, height: 300)
-            .border(ImagePaint(image: Image("singapore"), sourceRect: CGRect(x: 0, y: 0.25, width: 1, height: 0.5), scale: 0.2), width: 50)
+        Capsule()
+            .strokeBorder(ImagePaint(image: Image("singapore"), sourceRect: CGRect(x: 0, y: 0.25, width: 1, height: 0.5), scale: 0.2), lineWidth: 20)
+            .frame(width: 300, height: 200)
     }
 }
 
