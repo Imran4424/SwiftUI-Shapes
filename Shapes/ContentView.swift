@@ -74,14 +74,15 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Flower(petalOffset: petalOffset, petalWidth: petalWidth)
-                .stroke(.red, lineWidth: 1)
+                .fill(.red, style: FillStyle(eoFill: true))
+                //.stroke(.red, lineWidth: 1)
             
             Text("Offset")
             Slider(value: $petalOffset, in: -40...40)
                 .padding([.horizontal, .bottom])
             
             Text("Width")
-            Slider(value: $petalWidth, in: 0...100)
+            Slider(value: $petalWidth, in: 1...100)
                 .padding(.horizontal)
         }
     }
