@@ -23,7 +23,7 @@ struct Triangle: Shape {
 struct ContentView: View {
     var body: some View {
         Triangle()
-            .fill(.red)
+            .stroke(.red, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
             .frame(width: 300, height: 300)
     }
 }
