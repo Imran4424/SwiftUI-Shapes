@@ -41,7 +41,7 @@ struct Arc: Shape {
 
 struct ContentView: View {
     var body: some View {
-        Circle()
+        Arc(startAngle: .degrees(-90), endAngle: .degrees(90), clockWise: true)
             .strokeBorder(.blue, lineWidth: 40)
     }
 }
