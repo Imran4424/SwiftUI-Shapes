@@ -42,7 +42,7 @@ struct Arc: Shape {
 struct ContentView: View {
     var body: some View {
         Circle()
-            .stroke(.blue, lineWidth: 40)
+            .strokeBorder(.blue, lineWidth: 40)
     }
 }
 
