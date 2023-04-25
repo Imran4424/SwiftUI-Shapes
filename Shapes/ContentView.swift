@@ -71,7 +71,7 @@ struct ContentView: View {
     var body: some View {
         Text("Imran Hossain")
             .frame(width: 300, height: 300)
-            .border(ImagePaint(image: Image("singapore")), width: 30)
+            .border(ImagePaint(image: Image("singapore"), scale: 0.2), width: 30)
     }
 }
 
