@@ -105,13 +105,8 @@ struct ColorCyclingCircle: View {
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Image("singapore")
-            
-            Rectangle()
-                .fill(.red)
-                .blendMode(.multiply)
-        }
+        Image("singapore")
+            .colorMultiply(.red)
     }
 }
 
