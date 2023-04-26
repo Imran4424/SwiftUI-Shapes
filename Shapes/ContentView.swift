@@ -77,7 +77,14 @@ struct ColorCyclingCircle: View {
                 Circle()
                     .inset(by: Double(value))
                     .strokeBorder(
-                        color(for: value, brightness: 1),
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                color(for: value, brightness: 1),
+                                color(for: value, brightness: 0.5)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ),
                         lineWidth: 2
                     )
             }
