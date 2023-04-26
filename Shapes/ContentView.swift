@@ -128,15 +128,53 @@ struct Trapezoid: Shape {
     }
 }
 
+struct CheckerBoard: Shape {
+    var rows: Int
+    var columns: Int
+    
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+            AnimatablePair(Double(rows), Double(columns))
+        }
+        
+        set {
+            rows = Int(newValue.first)
+            columns = Int(newValue.second)
+        }
+    }
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        let rowSize = rect.height / Double(rows)
+        let columnSize = rect.width / Double(columns)
+        
+        for row in 0..<rows {
+            for col in 0..<columns {
+                if (row + col).isMultiple(of: 2) {
+                    let startX = columnSize * Double(col)
+                    let startY = rowSize * Double(row)
+                    
+                    let rect = CGRect(x: startX, y: startY, width: columnSize, height: rowSize)
+                    path.addRect(rect)
+                }
+            }
+        }
+        
+        return path
+    }
+}
+
 struct ContentView: View {
-    @State private var insetAmount = 0.0
+    @State private var rows = 4
+    @State private var columns = 4
     
     var body: some View {
-        Trapezoid(insetAmount: insetAmount)
-            .frame(width: 200, height: 100)
+        CheckerBoard(rows: rows, columns: columns)
             .onTapGesture {
-                withAnimation {
-                    insetAmount = Double.random(in: 10...90)
+                withAnimation(.linear(duration: 3)) {
+                    rows = 8
+                    columns = 16
                 }
             }
     }
