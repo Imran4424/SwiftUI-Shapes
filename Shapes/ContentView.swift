@@ -103,24 +103,42 @@ struct ColorCyclingCircle: View {
     }
 }
 
+struct Trapezoid: Shape {
+    var insetAmount: Double
+    
+    // intermediate value between source and destination (buffer)
+    // by adding this animatableData
+    // this shape is now animating
+    // this is for keeping track of the value change
+    var animatableData: Double {
+        get { insetAmount }
+        set { insetAmount = newValue }
+    }
+    
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        
+        path.move(to: CGPoint(x: 0, y: rect.maxY))
+        path.addLine(to: CGPoint(x: insetAmount, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX - insetAmount, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: 0, y: rect.maxY))
+        
+        return path
+    }
+}
+
 struct ContentView: View {
-    @State private var amount = 0.0
+    @State private var insetAmount = 0.0
     
     var body: some View {
-        VStack {
-            Image("singapore")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 300)
-                .saturation(amount)
-                .blur(radius: (1 - amount) * 20)
-            
-            Slider(value: $amount)
-                .padding()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.black)
-        .ignoresSafeArea()
+        Trapezoid(insetAmount: insetAmount)
+            .frame(width: 200, height: 100)
+            .onTapGesture {
+                withAnimation {
+                    insetAmount = Double.random(in: 10...90)
+                }
+            }
     }
 }
 
