@@ -89,6 +89,7 @@ struct ColorCyclingCircle: View {
                     )
             }
         }
+        .drawingGroup()
     }
     
     func color(for value: Int, brightness: Double) -> Color {
